@@ -1,0 +1,16 @@
+{
+  "jupyter-lite-schema-version": 0,
+  "jupyter-config-data": {
+    "appName": "Physics Notes",
+    "appDescription": "Interactive physics notes with runnable Python code.",
+    "disabledExtensions": [
+      "@jupyterlite/dirlisting-extension"
+    ],
+    "theme": "JupyterLab Dark"
+  },
+  "files": [
+    {
+      "pattern": "content/**/*"
+    }
+  ]
+}
