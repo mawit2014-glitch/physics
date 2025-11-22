@@ -1,0 +1,37 @@
+name: Deploy JupyterLite site
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install JupyterLite
+      run: |
+        pip install jupyterlite
+
+    - name: Build site
+      run: |
+        jupyter lite build --output-dir dist
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: site
+        path: dist
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: dist
